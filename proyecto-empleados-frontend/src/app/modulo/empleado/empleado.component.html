@@ -1,0 +1,412 @@
+<app-navbar></app-navbar>
+
+<div class="container pt-2">
+    <div class="row justify-content-sm-center pt-3">
+        <div class="col-sm-6 shadow round pb-3">
+            <br>
+            <div class="row">
+                <div class="col">
+                    <button [disabled]="this.guardarEmpleados" type="button" class="btn btn-primary w-100"
+                        (click)="abrirGuardarEmpleado()">Guardar empleado</button>
+                </div>
+                <div class="col">
+                    <button [disabled]="this.modificarEmpleados" type="button" class="btn btn-primary w-100"
+                        (click)="abrirModificarEmpleado()">Modificar empleado</button>
+                </div>
+                <div class="col">
+                    <button [disabled]="this.guardarJornadas" type="button" class="btn btn-primary w-100"
+                        (click)="abrirGuardarJornada()">Guardar jornada</button>
+                </div>
+                <div class="col">
+                    <button [disabled]="this.asignarJornadas" type="button" class="btn btn-primary w-100"
+                        (click)="abrirAsignarJornada()">Asignar jornada</button>
+                </div>
+                <div class="col">
+                    <button [disabled]="this.modificarJornadas" type="button" class="btn btn-primary w-100"
+                        (click)="abrirModificarJornada()">Modificar jornada</button>
+                </div>
+            </div>
+            <h1 *ngIf="guardarEmpleados" class="text-center pt-3 text-secondary">Guardar empleado</h1>
+            <h1 *ngIf="modificarEmpleados" class="text-center pt-3 text-secondary">Modificar empleado</h1>
+            <h1 *ngIf="asignarJornadas" class="text-center pt-3 text-secondary">Asignar jornada</h1>
+            <h1 *ngIf="guardarJornadas" class="text-center pt-3 text-secondary">Guardar jornada</h1>
+            <h1 *ngIf="modificarJornadas" class="text-center pt-3 text-secondary">Modificar jornada</h1>
+            <form *ngIf="guardarEmpleados || modificarEmpleados" [formGroup]="formEmpleado">
+                <div *ngIf="modificarEmpleados" class="form-group">
+                    <label class="col-form-label">Id:</label>
+                    <input formControlName="id" type="number" class="form-control"
+                        placeholder="Escriba el id del empleado">
+                    <div *ngIf="formEmpleado.get('id')?.invalid && (formEmpleado.get('id')?.dirty || formEmpleado.get('id')?.touched)"
+                        class="alert alert-danger">
+                        El id es requerido.
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-form-label">Nombre:</label>
+                    <input formControlName="nombre" type="text" class="form-control"
+                        placeholder="Escriba el nombre del empleado">
+                    <div *ngIf="formEmpleado.get('nombre')?.invalid && (formEmpleado.get('nombre')?.dirty || formEmpleado.get('nombre')?.touched)"
+                        class="alert alert-danger">
+                        El nombre es requerido.
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-form-label">Apellido:</label>
+                    <input formControlName="apellido" type="text" class="form-control"
+                        placeholder="Escriba el apellido del empleado">
+                    <div *ngIf="formEmpleado.get('apellido')?.invalid && (formEmpleado.get('apellido')?.dirty || formEmpleado.get('apellido')?.touched)"
+                        class="alert alert-danger">
+                        El apellido es requerido.
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-form-label">Edad:</label>
+                    <input formControlName="edad" type="number" class="form-control"
+                        placeholder="Escriba la edad del empleado">
+                    <div *ngIf="formEmpleado.get('edad')?.invalid && (formEmpleado.get('edad')?.dirty || formEmpleado.get('edad')?.touched)"
+                        class="alert alert-danger">
+                        La edad es requerida.
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-form-label">DNI:</label>
+                    <input formControlName="dni" type="number" class="form-control"
+                        placeholder="Escriba el DNI del empleado">
+                    <div *ngIf="formEmpleado.get('dni')?.invalid && (formEmpleado.get('dni')?.dirty || formEmpleado.get('dni')?.touched)"
+                        class="alert alert-danger">
+                        El DNI es requerido.
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col">
+                        <button *ngIf="guardarEmpleados" type="submit" class="btn btn-primary w-100"
+                            (click)="crearEmpleado()"
+                            [disabled]="this.formEmpleado.get('nombre')?.invalid || this.formEmpleado.get('apellido')?.invalid || this.formEmpleado.get('edad')?.invalid || this.formEmpleado.get('dni')?.invalid">Guardar</button>
+                        <button *ngIf="modificarEmpleados" type="submit" class="btn btn-primary w-100"
+                            (click)="modificarEmpleado()"
+                            [disabled]="this.formEmpleado.get('id')?.invalid || this.formEmpleado.get('nombre')?.invalid || this.formEmpleado.get('apellido')?.invalid || this.formEmpleado.get('edad')?.invalid || this.formEmpleado.get('dni')?.invalid">Modificar</button>
+                    </div>
+                    <div class="col"></div>
+                    <div class="col"></div>
+                    <div class="col"></div>
+                    <div class="col">
+                        <button type="button" class="btn btn-danger w-100"
+                            (click)="limpiarFormulario()">Limpiar</button>
+                    </div>
+                </div>
+            </form>
+            <form *ngIf="guardarJornadas || modificarJornadas || asignarJornadas" [formGroup]="formJornada">
+                <div class="form-group">
+                    <label class="col-form-label">Empleado id:</label>
+                    <input formControlName="idEmpleado" type="number" class="form-control"
+                        placeholder="Escriba el id del empleado">
+                    <div *ngIf="formJornada.get('idEmpleado')?.invalid && (formJornada.get('idEmpleado')?.dirty || formJornada.get('idEmpleado')?.touched)"
+                        class="alert alert-danger">
+                        El id del empleado requerido.
+                    </div>
+                </div>
+                <div *ngIf="asignarJornadas || modificarJornadas" class="form-group">
+                    <label class="col-form-label">Jornada id:</label>
+                    <input formControlName="idJornada" type="number" class="form-control"
+                        placeholder="Escriba el id de jornada">
+                    <div *ngIf="formJornada.get('idJornada')?.invalid && (formJornada.get('idJornada')?.dirty || formJornada.get('idJornada')?.touched)"
+                        class="alert alert-danger">
+                        El id de la jornada requerida.
+                    </div>
+                </div>
+                <div *ngIf="guardarJornadas || modificarJornadas" class="form-group">
+                    <label class="col-form-label">Tipo:</label>
+                    <input formControlName="tipo" type="text" class="form-control"
+                        placeholder="Escriba el tipo de jornada">
+                    <div *ngIf="formJornada.get('tipo')?.invalid && (formJornada.get('tipo')?.dirty || formJornada.get('tipo')?.touched)"
+                        class="alert alert-danger">
+                        El tipo es requerido.
+                    </div>
+                </div>
+                <div *ngIf="guardarJornadas || modificarJornadas" class="form-group">
+                    <label class="col-form-label">Fecha:</label>
+                    <input formControlName="fecha" type="text" class="form-control" placeholder="Escriba la fecha">
+                    <div *ngIf="formJornada.get('fecha')?.invalid && (formJornada.get('fecha')?.dirty || formJornada.get('fecha')?.touched)"
+                        class="alert alert-danger">
+                        La fecha es requerida.
+                    </div>
+                </div>
+                <div *ngIf="guardarJornadas || modificarJornadas" class="form-group">
+                    <label class="col-form-label">Horario de entrada:</label>
+                    <input formControlName="horarioEntrada" type="number" class="form-control"
+                        placeholder="Escriba el horario de entrada">
+                    <div *ngIf="formJornada.get('horarioEntrada')?.invalid && (formJornada.get('horarioEntrada')?.dirty || formJornada.get('horarioEntrada')?.touched)"
+                        class="alert alert-danger">
+                        El horario de entrada es requerido.
+                    </div>
+                </div>
+                <div *ngIf="guardarJornadas || modificarJornadas" class="form-group">
+                    <label class="col-form-label">Horario de salida:</label>
+                    <input formControlName="horarioSalida" type="number" class="form-control"
+                        placeholder="Escriba el horario de salida">
+                    <div *ngIf="formJornada.get('horarioSalida')?.invalid && (formJornada.get('horarioSalida')?.dirty || formJornada.get('horarioSalida')?.touched)"
+                        class="alert alert-danger">
+                        El horario de salida es requerido.
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col">
+                        <button *ngIf="asignarJornadas" type="submit" class="btn btn-primary w-100"
+                            (click)="asignarJornadaYaExistenteAEmpleado()"
+                            [disabled]="this.formJornada.get('idEmpleado')?.invalid || this.formJornada.get('idJornada')?.invalid">Asignar</button>
+                        <button *ngIf="guardarJornadas" type="submit" class="btn btn-primary w-100"
+                            (click)="asignarJornadaNoExistenteAEmpleado()"
+                            [disabled]="this.formJornada.get('idEmpleado')?.invalid || this.formJornada.get('tipo')?.invalid || this.formJornada.get('fecha')?.invalid || this.formJornada.get('horarioEntrada')?.invalid || this.formJornada.get('horarioSalida')?.invalid">Guardar</button>
+                        <button *ngIf="modificarJornadas" type="submit" class="btn btn-primary w-100"
+                            (click)="modificarJornadaDeUnEmpleado()"
+                            [disabled]="this.formJornada.get('idEmpleado')?.invalid || this.formJornada.get('idJornada')?.invalid || this.formJornada.get('tipo')?.invalid || this.formJornada.get('fecha')?.invalid || this.formJornada.get('horarioEntrada')?.invalid || this.formJornada.get('horarioSalida')?.invalid">Modificar</button>
+                    </div>
+                    <div class="col"></div>
+                    <div class="col"></div>
+                    <div class="col"></div>
+                    <div class="col">
+                        <button type="button" class="btn btn-danger w-100"
+                            (click)="limpiarFormulario()">Limpiar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<br>
+<br>
+
+<div class="col">
+    <div class="container-fluid">
+        <div class="row bg-dark" style="height: 50px;">
+            <div class="col"></div>
+            <div class="col text-light d-flex justify-content-center align-items-center">
+                <div class="fs-2">Listado de empleados</div>
+            </div>
+            <div class="col"></div>
+        </div>
+        <form [formGroup]="formEmpleado">
+            <div class="row bg-dark">
+                <div class="col"></div>
+                <div class="col text-light d-flex justify-content-end align-items-center">
+                    <span>Buscar un empleado:</span>
+                </div>
+                <div class="col d-flex align-items-center">
+                    <input formControlName="buscar" class="form-control w-100 h-75" type="number"
+                        placeholder="Ingrese id del empleado">
+                </div>
+                <div class="col d-flex justify-content-start align-items-center">
+                    <button [disabled]="this.formEmpleado.get('buscar')?.invalid"
+                        class="btn btn-primary w-50 h-75 d-flex justify-content-center align-items-center" type="submit"
+                        (click)="mostrarEmpleado()">Buscar</button>
+                </div>
+                <div class="col d-flex justify-content-center align-items-center">
+                    <button [disabled]="!this.unEmpleado"
+                        class="btn btn-primary h-75 d-flex justify-content-center align-items-center" type="submit"
+                        (click)="mostrarEmpleados()">Buscar todos los empleados</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Apellido</th>
+                <th scope="col">Edad</th>
+                <th scope="col">DNI</th>
+                <th scope="col">Modificar</th>
+                <th scope="col">Eliminar</th>
+                <th scope="col">Crear y asignar una jornada</th>
+                <th scope="col">Asignar una jornada</th>
+                <th scope="col">Mostrar jornadas</th>
+            </tr>
+        </thead>
+        <tbody [ngClass]="{'d-none': unEmpleado && empleado.id !== empleadoSolo}" *ngFor="let empleado of listEmpleados; let i = index">
+            <tr>
+                <th scope="row">{{empleado.id}}</th>
+                <td>{{empleado.nombre}}</td>
+                <td>{{empleado.apellido}}</td>
+                <td>{{empleado.edad}}</td>
+                <td>{{empleado.dni}}</td>
+                <td>
+                    <div class="div-modificar" (click)="abrirModificarEmpleadoConEmpleado(empleado)">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-pencil div-modificar-svg1" viewBox="0 0 16 16">
+                            <path
+                                d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z" />
+                        </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-pencil-fill div-modificar-svg2" viewBox="0 0 16 16">
+                            <path
+                                d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z" />
+                        </svg>
+                    </div>
+                </td>
+                <td>
+                    <div class="div-eliminar" (click)="eliminarEmpleado(empleado.id)">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-trash3 div-eliminar-svg1" viewBox="0 0 16 16">
+                            <path
+                                d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z" />
+                        </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-trash3-fill div-eliminar-svg2" viewBox="0 0 16 16">
+                            <path
+                                d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z" />
+                        </svg>
+                    </div>
+                </td>
+                <td>
+                    <div class="div-crear-y-asignar" (click)="abrirGuardarJornadaConEmpleado(empleado.id!)">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-file-plus div-crear-y-asignar-svg1" viewBox="0 0 16 16">
+                            <path
+                                d="M8.5 6a.5.5 0 0 0-1 0v1.5H6a.5.5 0 0 0 0 1h1.5V10a.5.5 0 0 0 1 0V8.5H10a.5.5 0 0 0 0-1H8.5V6z" />
+                            <path
+                                d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2zm10-1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1z" />
+                        </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-file-plus-fill div-crear-y-asignar-svg2" viewBox="0 0 16 16">
+                            <path
+                                d="M12 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM8.5 6v1.5H10a.5.5 0 0 1 0 1H8.5V10a.5.5 0 0 1-1 0V8.5H6a.5.5 0 0 1 0-1h1.5V6a.5.5 0 0 1 1 0z" />
+                        </svg>
+                    </div>
+                </td>
+                <td>
+                    <div class="div-asignar" (click)="abrirAsignarJornadaConEmpleado(empleado.id!)">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-plus-circle div-asignar-svg1" viewBox="0 0 16 16">
+                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                            <path
+                                d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
+                        </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-plus-circle-fill div-asignar-svg2" viewBox="0 0 16 16">
+                            <path
+                                d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z" />
+                        </svg>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="iteracion !== i" class="div-mostrar" (click)="mostrarJornadasDeEmpleado(i)">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-caret-down div-mostrar-svg1" viewBox="0 0 16 16">
+                            <path
+                                d="M3.204 5h9.592L8 10.481 3.204 5zm-.753.659 4.796 5.48a1 1 0 0 0 1.506 0l4.796-5.48c.566-.647.106-1.659-.753-1.659H3.204a1 1 0 0 0-.753 1.659z" />
+                        </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-caret-down-fill div-mostrar-svg2" viewBox="0 0 16 16">
+                            <path
+                                d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z" />
+                        </svg>
+                    </div>
+                    <div *ngIf="iteracion === i" class="div-mostrar" (click)="mostrarJornadasDeEmpleado(i)">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-caret-up div-mostrar-svg1" viewBox="0 0 16 16">
+                            <path
+                                d="M3.204 11h9.592L8 5.519 3.204 11zm-.753-.659 4.796-5.48a1 1 0 0 1 1.506 0l4.796 5.48c.566.647.106 1.659-.753 1.659H3.204a1 1 0 0 1-.753-1.659z" />
+                        </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-caret-up-fill div-mostrar-svg2" viewBox="0 0 16 16">
+                            <path
+                                d="m7.247 4.86-4.796 5.481c-.566.647-.106 1.659.753 1.659h9.592a1 1 0 0 0 .753-1.659l-4.796-5.48a1 1 0 0 0-1.506 0z" />
+                        </svg>
+                    </div>
+                </td>
+            </tr>
+            <tr *ngIf="empleado.jornadas && empleado.jornadas.length > 0 && iteracion === i">
+                <td colspan="10">
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col">Id</th>
+                                <th scope="col">Tipo</th>
+                                <th scope="col">Fecha</th>
+                                <th scope="col">Horario de entrada</th>
+                                <th scope="col">Horario de salida</th>
+                                <th scope="col">Empleado al que pertenece</th>
+                                <th scope="col">Desvincular</th>
+                                <th scope="col">Modificar</th>
+                                <th scope="col">Eliminar</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let jornada of empleado.jornadas">
+                                <th scope="row">{{jornada.id}}</th>
+                                <td>{{jornada.tipo}}</td>
+                                <td>{{jornada.fecha}}</td>
+                                <td>{{jornada.horarioEntrada}}</td>
+                                <td>{{jornada.horarioSalida}}</td>
+                                <td>{{jornada.empleadoId}}</td>
+                                <td>
+                                    <div class="div-desvincular" (click)="desvincularUnaJornadaQueEstaDentroDeUnEmpleado(empleado.id!, jornada.id!)">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            fill="currentColor" class="bi bi-dash-circle div-desvincular-svg1"
+                                            viewBox="0 0 16 16">
+                                            <path
+                                                d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                                            <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z" />
+                                        </svg>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            fill="currentColor" class="bi bi-dash-circle-fill div-desvincular-svg2"
+                                            viewBox="0 0 16 16">
+                                            <path
+                                                d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM4.5 7.5a.5.5 0 0 0 0 1h7a.5.5 0 0 0 0-1h-7z" />
+                                        </svg>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="div-modificar" (click)="abrirModificarJornadaConJornada(empleado.id!, jornada)">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            fill="currentColor" class="bi bi-pencil div-modificar-svg1"
+                                            viewBox="0 0 16 16">
+                                            <path
+                                                d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z" />
+                                        </svg>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            fill="currentColor" class="bi bi-pencil-fill div-modificar-svg2"
+                                            viewBox="0 0 16 16">
+                                            <path
+                                                d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z" />
+                                        </svg>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="div-eliminar" (click)="eliminarUnaJornadaQueEstaDentroDeUnEmpleado(empleado.id!, jornada.id!)">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            fill="currentColor" class="bi bi-trash3 div-eliminar-svg1"
+                                            viewBox="0 0 16 16">
+                                            <path
+                                                d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z" />
+                                        </svg>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            fill="currentColor" class="bi bi-trash3-fill div-eliminar-svg2"
+                                            viewBox="0 0 16 16">
+                                            <path
+                                                d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z" />
+                                        </svg>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+            <tr *ngIf="empleado.jornadas && empleado.jornadas.length < 1 && iteracion === i">
+                <td colspan="10">
+                    <div class="d-flex justify-content-center fw-bold">
+                        Este empleado no tiene jornadas
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div class="w-100 h-25">
+
+</div>

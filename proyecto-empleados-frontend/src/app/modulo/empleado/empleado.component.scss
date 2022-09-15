@@ -1,0 +1,171 @@
+.div-crear-y-asignar-svg1{
+    display: block;
+}
+
+.div-crear-y-asignar-svg2{
+    display: none;
+}
+
+.div-crear-y-asignar{
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+}
+
+.div-crear-y-asignar:hover .div-crear-y-asignar-svg1{
+    display: none;
+}
+
+.div-crear-y-asignar:hover .div-crear-y-asignar-svg2{
+    display: block;
+}
+
+.div-crear-y-asignar:active{
+    transform-origin: center;
+    transform: scale(0.9);
+}
+
+
+
+.div-asignar-svg1{
+    display: block;
+}
+
+.div-asignar-svg2{
+    display: none;
+}
+
+.div-asignar{
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+}
+
+.div-asignar:hover .div-asignar-svg1{
+    display: none;
+}
+
+.div-asignar:hover .div-asignar-svg2{
+    display: block;
+}
+
+.div-asignar:active{
+    transform-origin: center;
+    transform: scale(0.9);
+}
+
+
+
+.div-modificar-svg1{
+    display: block;
+}
+
+.div-modificar-svg2{
+    display: none;
+}
+
+.div-modificar{
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+}
+
+.div-modificar:hover .div-modificar-svg1{
+    display: none;
+}
+
+.div-modificar:hover .div-modificar-svg2{
+    display: block;
+}
+
+.div-modificar:active{
+    transform-origin: center;
+    transform: scale(0.9);
+}
+
+
+
+.div-eliminar-svg1{
+    display: block;
+}
+
+.div-eliminar-svg2{
+    display: none;
+}
+
+.div-eliminar{
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+}
+
+.div-eliminar:hover .div-eliminar-svg1{
+    display: none;
+}
+
+.div-eliminar:hover .div-eliminar-svg2{
+    display: block;
+}
+
+.div-eliminar:active{
+    transform-origin: center;
+    transform: scale(0.9);
+}
+
+
+
+.div-mostrar-svg1{
+    display: block;
+}
+
+.div-mostrar-svg2{
+    display: none;
+}
+
+.div-mostrar{
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+}
+
+.div-mostrar:hover .div-mostrar-svg1{
+    display: none;
+}
+
+.div-mostrar:hover .div-mostrar-svg2{
+    display: block;
+}
+
+.div-mostrar:active{
+    transform-origin: center;
+    transform: scale(0.9);
+}
+
+
+
+.div-desvincular-svg1{
+    display: block;
+}
+
+.div-desvincular-svg2{
+    display: none;
+}
+
+.div-desvincular{
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+}
+
+.div-desvincular:hover .div-desvincular-svg1{
+    display: none;
+}
+
+.div-desvincular:hover .div-desvincular-svg2{
+    display: block;
+}
+
+.div-desvincular:active{
+    transform-origin: center;
+    transform: scale(0.9);
+}
