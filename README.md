@@ -7,8 +7,9 @@ Esta es una aplicación web diseñada para el manejo de empleados junto con sus 
 
 ### Aclaraciones:
 
+* Puede ser que el servidor tarde en responder al principio de cuando se empieza a utilizar la aplicación. Solo hay que esperar unos segundos y empezará a andar correctamente.
 * Este programa da libertad a la hora de crear jornadas y asignarlas a los empleados de 2 maneras. Como es la primera vez que hago este tipo de trabajo, quise dejar estas 2 opciones aunque soy consciente de que son más líneas de código.
-* Todavía faltan implementar ciertas cosas como por ejemplo dar feedback al usuario de cuando se realiza bien o mal algo. Esto se implementará en una futura actualización así que si no puede por ejemplo modificar un empleado, va a tener que dirigirse al apartado "Reglas de negocio" de aquí mismo o "Reglas de la aplicación" en la página web y fijarse qué es lo que no está cumpliendo.
+* Todavía faltan arreglar algunos bugs e implementar ciertas cosas como por ejemplo dar feedback al usuario de cuando se realiza bien o mal algo. Esto se implementará en una futura actualización así que si no puede por ejemplo modificar un empleado, va a tener que dirigirse al apartado "Reglas de negocio" de aquí mismo o "Reglas de la aplicación" en la página web y fijarse qué es lo que no está cumpliendo.
 
 
 ## Probar la aplicación:
@@ -82,6 +83,7 @@ Esta aplicación tiene el frontend hosteado en GitHub Pages y el backend junto c
 * Un atributo de tipo LocalDate para la fecha.
 * Un atributo de tipo Integer para el horario de entrada.
 * Un atributo de tipo Integer para el horario de salida.
+* Un atributo de tipo Integer para el empleado al cual pertenece.
 
 #### Se creó un Enum de tipo JoradaType con los valores:
 * TURNO_NORMAL
